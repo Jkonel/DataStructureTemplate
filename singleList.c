@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-04-28 10:57:47
  * @LastEditors: jkonel
- * @LastEditTime: 2020-04-28 20:44:20
+ * @LastEditTime: 2020-04-28 21:55:27
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -159,6 +159,22 @@ bool ListDeleteNode(pLinked_List* ppheader, int addr)
     }
     else {
         return false;
+    }
+}
+
+/**
+ * @description: 单链表清空函数
+ * @param : 链表二级头指针
+ * @return: void
+ */
+void ListEmptyNode(pLinked_List* ppheader)
+{
+    pLinked_List* pplink = ppheader;
+    pLinked_List temp;
+    while ((*pplink) != NULL) {
+        temp = (*pplink);
+        *pplink = (*pplink)->next;
+        free(temp);
     }
 }
 

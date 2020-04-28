@@ -9,7 +9,9 @@
             "command": "D:\\E\\PROFESSIONAL\\MinGW\\bin\\gcc.exe",
             "args": [
                 "-g",
-                "${file}",
+                "${workspaceFolder}\\${relativeFileDirname}\\*.c",
+                "${workspaceFolder}\\${relativeFileDirname}\\*.h",
+                //"${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
