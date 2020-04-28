@@ -1,12 +1,13 @@
 #ifndef _LINKED_LIST_H
 #define _LINKED_LIST_H
 
-typedef struct linked_List 
+
+//链表核心结构
+typedef struct linked_List
 {
+    int a;  //存储数据
     struct linked_List* next;
-    int a[5];
-    /* data */
-}linkedList,*pLinkedList;
+} linked_List, *pLinked_List;
 
 
 #endif
