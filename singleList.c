@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-04-28 10:57:47
  * @LastEditors: jkonel
- * @LastEditTime: 2020-04-28 21:55:27
+ * @LastEditTime: 2020-04-30 12:10:46
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -205,6 +205,23 @@ bool ListFindNode(pLinked_List* ppheader, int addr, int* a)
 }
 
 /**
+ * @description: 单链表长度读取函数
+ * @param : ppheader：链表二级头指针
+ * @return: 链表长度(真实长度)
+ */
+int ListLength(pLinked_List* ppheader)
+{
+    int cnt = 0;
+    pLinked_List* pplink = ppheader;
+
+    while ((*pplink) != NULL) {
+        cnt++;
+        pplink = &(*pplink)->next;
+    }
+    return cnt;
+}
+
+/**
  * @description: 链表逆序函数
  * @param : 处理前链表头指针
  * @return: 处理后链表头指针
@@ -222,4 +239,98 @@ pLinked_List ListReverse(pLinked_List oldHeader)
         pOldList = ptemp;           //处理位置原始后移
     }
     return pNewList;  //设置新链表头
+}
+
+
+
+// homework:
+/**
+ * @description: 递归遍历单链表函数
+ * @param : 链表二级头指针
+ * @return: void
+ */
+void ListThrouth(pLinked_List pheader)
+{
+    if (pheader->next == NULL) {
+        printf("%d ", pheader->a);  // 逆序输出
+    }
+    else {
+        ListThrouth(pheader->next);
+    }
+    /*
+            if (pheader->next != NULL) {
+             printf("%d ", pheader->a);//顺序输出
+             ListThrouth(pheader->next);
+         }
+         else {
+             return;
+         }
+    */
+}
+
+
+/**
+ * @description: 删除单链表中整数元素()
+ * @param :链表二级头指针
+ * @return:void
+ */
+void ListDeletePositive(pLinked_List* ppheader)
+{
+    pLinked_List* pplink = ppheader;
+    pLinked_List temp;
+
+    while ((*pplink) != NULL) {
+        if ((*pplink)->a > 0) {
+            temp = *pplink;
+            *pplink = (*pplink)->next;
+            free(temp);
+        }
+        else {
+            pplink = &(*pplink)->next;
+        }
+    }
+}
+
+/**
+ * @description: 交换相邻序号为奇偶的元素()
+ * @param : 链表二级头指针
+ * @return: void
+ */
+void ListSwitch(pLinked_List* ppheader)
+{
+    pLinked_List plink = *ppheader;      //当前节点指针
+    pLinked_List* prepplink = ppheader;  //前一节点二级指针
+    pLinked_List temp;                   //临时结点指针
+
+    while (plink->next != NULL) {
+        temp = (plink->next)->next;
+        *prepplink = plink->next;
+        (plink->next)->next = plink;
+        plink->next = temp;
+        prepplink = &(*prepplink)->next;
+    }
+}
+
+/**
+ * @description: 和并生成新链表
+ * @param : 原链表二级头指针
+ * @return: 新链表头指针
+ */
+pLinked_List ListCreateNewList(pLinked_List* ppheader)
+{
+    pLinked_List plink = *ppheader;
+    pLinked_List pheader;
+    pLinked_List pnode;
+
+    while (plink->next != NULL) {
+        ListInsertLastNode(&pheader, ListCreateNode(plink->a + plink->next->a));
+        if (plink->next->next != NULL) {
+            plink = plink->next->next;
+        }
+        else {
+            return pheader;
+        }
+    }
+    ListInsertLastNode(&pheader, ListCreateNode(plink->a));
+    return pheader;
 }
