@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-04-28 10:57:47
  * @LastEditors: jkonel
- * @LastEditTime: 2020-04-30 12:10:46
+ * @LastEditTime: 2020-05-09 09:03:43
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -292,7 +292,7 @@ void ListDeletePositive(pLinked_List* ppheader)
 }
 
 /**
- * @description: 交换相邻序号为奇偶的元素()
+ * @description: 交换相邻序号为奇偶的元素
  * @param : 链表二级头指针
  * @return: void
  */
