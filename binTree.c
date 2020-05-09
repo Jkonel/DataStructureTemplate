@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-05-09 09:44:00
  * @LastEditors: jkonel
- * @LastEditTime: 2020-05-09 10:07:57
+ * @LastEditTime: 2020-05-09 10:35:40
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -64,5 +64,29 @@ void BinTreePostorderTraversal(pBinTree ptree)
         BinTreePreorderTraversal(ptree->left);
         BinTreePreorderTraversal(ptree->right);
         printf("%d ", ptree->a);
+    }
+}
+
+
+//二叉树非递归遍历
+/**
+ * @description: 二叉树非递归中序遍历
+ * @param : ptree
+ * @return: void
+ */
+#include "stack.h"
+void BinTreeInorderTraversal_Nrec(pBinTree ptree)
+{
+    pBinTree pLocalTree = ptree;
+    pStack pstac = StackCreate(20);
+
+    while (pLocalTree != NULL || !StackIfEmpty(pstac)) {
+        while (pLocalTree != NULL) {
+            StackPush(pstac, pLocalTree);  //伪代码
+            pLocalTree = pLocalTree->left;
+        }
+        StackPop(pstac, &pLocalTree);  //伪代码
+        printf("%d ", pLocalTree->a);
+        pLocalTree = pLocalTree->right;
     }
 }
