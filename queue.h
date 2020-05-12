@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-05-07 09:58:56
  * @LastEditors: jkonel
- * @LastEditTime: 2020-05-07 10:21:44
+ * @LastEditTime: 2020-05-12 10:28:48
  */
 #ifndef _QUEUE_H
 #define _QUEUE_H
@@ -11,7 +11,7 @@
 //队列核心结构
 typedef struct
 {
-    int* data;
+    int* data;//任意类型指针
     int front, rear;
     int maxSize;
 } queue, *pQueue;
