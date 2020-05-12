@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-05-09 09:44:00
  * @LastEditors: jkonel
- * @LastEditTime: 2020-05-12 10:24:27
+ * @LastEditTime: 2020-05-12 10:33:40
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -75,7 +75,7 @@ void BinTreePostorderTraversal(pBinTree ptree)
 #include "queue.h"
 void BinTreeLevelorderTraversal(pBinTree ptree)
 {
-    pQueue pqueue;
+    pQueue pqueue;  //队列元素应为pBinTree类型
     pBinTree pTempTree;
 
     if (ptree == NULL)
