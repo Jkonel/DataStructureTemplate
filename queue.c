@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-05-07 09:58:46
  * @LastEditors: jkonel
- * @LastEditTime: 2020-05-12 10:28:35
+ * @LastEditTime: 2020-05-14 08:59:24
  */
 #include <stdio.h>
 #include <stdbool.h>
@@ -18,7 +18,7 @@
 pQueue QueueCreate(int maxSize)
 {
     pQueue pqueue = (pQueue)malloc(sizeof(queue));
-    pqueue->data = (int*)malloc(maxSize * sizeof(int));
+    pqueue->data = (queueData*)malloc(maxSize * sizeof(queueData));
     pqueue->front = 0;
     pqueue->rear = 0;
     pqueue->maxSize = maxSize;
@@ -50,7 +50,7 @@ bool QueueIfEmpty(pQueue pqueue)
  * @param : pqueue；dat
  * @return: true：插入成功；false：插入失败
  */
-bool QueueInsert(pQueue pqueue, int dat)
+bool QueueInsert(pQueue pqueue, queueData dat)
 {
     if (QueueIfEmpty(pqueue)) {
         return false;
@@ -67,7 +67,7 @@ bool QueueInsert(pQueue pqueue, int dat)
  * @param :pqueue；dat*
  * @return:true：输出成功；false：输出失败
  */
-bool QueueExport(pQueue pqueue, int* dat)
+bool QueueExport(pQueue pqueue, queueData* dat)
 {
     if (QueueIfEmpty(pqueue)) {
         return false;

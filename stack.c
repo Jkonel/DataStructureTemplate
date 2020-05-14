@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-05-07 09:08:57
  * @LastEditors: jkonel
- * @LastEditTime: 2020-05-07 09:43:48
+ * @LastEditTime: 2020-05-14 09:03:45
  */
 
 #include <stdio.h>
@@ -19,7 +19,7 @@
 pStack StackCreate(int maxSize)
 {
     pStack pstack = (pStack)malloc(sizeof(stack));
-    pstack->data = (int*)malloc(maxSize * sizeof(int));
+    pstack->data = (stackData*)malloc(maxSize * sizeof(stackData));
     pstack->top = -1;
     pstack->maxSize = maxSize;
     return pstack;
@@ -51,7 +51,7 @@ bool StackIfEmpty(pStack pstack)
  * @param : pstack，dat
  * @return: true:succeed；false：!
  */
-bool StackPush(pStack pstack, int dat)
+bool StackPush(pStack pstack, stackData dat)
 {
     if (StackIfFull(pstack)) {
         return false;
@@ -68,7 +68,7 @@ bool StackPush(pStack pstack, int dat)
  * @param : pstack；dat*
  * @return: true：出栈成功；false：出栈失败
  */
-bool StackPop(pStack pstack, int* dat)
+bool StackPop(pStack pstack, stackData* dat)
 {
     if (StackIfEmpty(pstack)) {
         return false;
