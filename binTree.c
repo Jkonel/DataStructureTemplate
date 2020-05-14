@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-05-09 09:44:00
  * @LastEditors: jkonel
- * @LastEditTime: 2020-05-12 10:33:40
+ * @LastEditTime: 2020-05-14 08:37:47
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -150,4 +150,70 @@ int BinTreeHight(pBinTree ptree)
     else {
         return 0;
     }
+}
+
+
+/*****二叉搜索树*****/
+/**
+ * @description: 二叉搜索树查找相应值
+ * @param :bst
+ * @return:ptree
+ */
+pBinTree BinSearchTreeFind(pBinTree bst, int x)
+{
+    // if (bst == NULL) {
+    // return NULL;
+    //}
+
+    // if (bst->a > x) {
+    // BSTFind(bst->left, x);
+    //}
+    // else if (bst->a < x) {
+    // BSTFind(bst->right, x);
+    //}
+    // else {
+    // return bst;
+    //}
+    while (bst != NULL) {
+        if (bst->a > x) {
+            bst = bst->left;
+        }
+        else if (bst->a < x) {
+            bst = bst->right;
+        }
+        else {
+            break;
+        }
+    }
+    return bst;
+}
+
+/**
+ * @description: 二叉搜索树查找最小值
+ * @param :bst
+ * @return:ptree
+ */
+pBinTree BinSearchTreeFindMin(pBinTree bst)
+{
+    if (bst != NULL) {
+        while (bst->left != NULL) {
+            bst = bst->left;
+        }
+    }
+    return bst;
+}
+
+/**
+ * @description: 二叉搜索树查找最大值
+ * @param :bst
+ * @return:ptree
+ */
+pBinTree BinSearchTreeFindMax(pBinTree bst)
+{
+    if (bst != NULL) {
+        while (bst->right != NULL) {
+            bst = bst->right;
+        }
+    }
+    return bst;
 }
