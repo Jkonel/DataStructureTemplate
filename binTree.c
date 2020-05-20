@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-05-09 09:44:00
  * @LastEditors: jkonel
- * @LastEditTime: 2020-05-14 10:08:02
+ * @LastEditTime: 2020-05-19 08:36:44
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -81,11 +81,12 @@ void BinTreeLevelorderTraversal(pBinTree ptree)
     if (ptree == NULL)
         return;
     pqueue = QueueCreate(100);
-    QueueInsert(pqueue, ptree);
+    QueueInsert(pqueue, ptree);  //根节点入队列
+
     while (!QueueIfEmpty(pqueue)) {
-        QueueExport(pqueue, &pTempTree);
+        QueueExport(pqueue, &pTempTree);  //出队列一节点
         printf("%d ", pTempTree->a);
-        if (pTempTree->left != NULL) {
+        if (pTempTree->left != NULL) {  //入该节点的子节点
             QueueInsert(pqueue, pTempTree->left);
         }
         if (pTempTree->right != NULL) {
@@ -151,6 +152,13 @@ int BinTreeHight(pBinTree ptree)
         return 0;
     }
 }
+
+
+/**
+ * @description: 二叉树层序生成
+ * @param :
+ * @return:
+ */
 
 
 /*****二叉搜索树*****/
@@ -255,8 +263,8 @@ pBinTree BinSearchTreeDelete(pBinTree bst, int x)
             bst->right = BinSearchTreeDelete(bst->right, x);
         }
         else {  //找到要删除的节点
-            if (bst->left != NULL &&
-                bst->right != NULL) {  //两个子节点，取右边最小元素
+            if (bst->left != NULL && bst->right != NULL) {
+                //两个子节点，取右边最小元素
                 temp = BinSearchTreeFindMin(bst->right);
                 bst->a = temp->a;
                 BinSearchTreeDelete(bst->right, temp->a);
@@ -269,7 +277,7 @@ pBinTree BinSearchTreeDelete(pBinTree bst, int x)
                 else {
                     bst = bst->left;
                 }
-                free(bst);
+                free(temp);
             }
         }
     }
