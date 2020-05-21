@@ -2,6 +2,7 @@
     "files.associations": {
         "linkedlist.h": "c",
         "singlelist.h": "c",
-        "bintree.h": "c"
+        "bintree.h": "c",
+        "stack.h": "c"
     }
 }

@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-05-09 09:44:00
  * @LastEditors: jkonel
- * @LastEditTime: 2020-05-19 08:36:44
+ * @LastEditTime: 2020-05-21 11:09:39
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -67,12 +67,13 @@ void BinTreePostorderTraversal(pBinTree ptree)
     }
 }
 
+
+#include "queue.h"
 /**
  * @description: 二叉树层序遍历函数
  * @param : ptree
  * @return: void
  */
-#include "queue.h"
 void BinTreeLevelorderTraversal(pBinTree ptree)
 {
     pQueue pqueue;  //队列元素应为pBinTree类型
@@ -95,12 +96,13 @@ void BinTreeLevelorderTraversal(pBinTree ptree)
     }
 }
 
+
+#include "stack.h"
 /**
  * @description: 二叉树非递归中序遍历
  * @param : ptree
  * @return: void
  */
-#include "stack.h"
 void BinTreeInorderTraversal_Nrec(pBinTree ptree)
 {
     pBinTree pLocalTree = ptree;
@@ -154,132 +156,52 @@ int BinTreeHight(pBinTree ptree)
 }
 
 
-/**
- * @description: 二叉树层序生成
- * @param :
- * @return:
- */
 
-
-/*****二叉搜索树*****/
 /**
- * @description: 二叉搜索树查找相应值
- * @param :bst
- * @return:ptree
+ * @description: 二叉树层序生成(key:队列的应用，左右节点存在再入队列)
+ * @param : dat[]:层序生成树指令数组(理论上不出错)
+ * @return: pTree：生成树头节点指针
  */
-pBinTree BinSearchTreeFind(pBinTree bst, int x)
+pBinTree BinTreeLevelCreate(int dat[])
 {
-    // if (bst == NULL) {
-    // return NULL;
-    //}
+    pBinTree pTree, pT;
+    pQueue pQueu = QueueCreate(100);
+    int i = 1;
 
-    // if (bst->a > x) {
-    // BSTFind(bst->left, x);
-    //}
-    // else if (bst->a < x) {
-    // BSTFind(bst->right, x);
-    //}
-    // else {
-    // return bst;
-    //}
-    while (bst != NULL) {
-        if (bst->a > x) {
-            bst = bst->left;
-        }
-        else if (bst->a < x) {
-            bst = bst->right;
+    if (dat[0] != NoInfo) {
+        pTree = (pBinTree)malloc(sizeof(binTree));
+        pTree->a = dat[0];
+        pTree->left = pTree->right = NULL;
+        QueueInsert(pQueu, pTree);  //头节点入队列
+    }
+    else {
+        return NULL;
+    }
+
+    while (!QueueIfEmpty(pQueu)) {
+        QueueExport(pQueu, &pT);  //取一个元素
+        //左节点处理
+        if (dat[i] != NoInfo) {
+            pT->left = (pBinTree)malloc(sizeof(binTree));
+            pT->left->a = dat[i];
+            pT->left->left = pT->left->right = NULL;
+            QueueInsert(pQueu, pT->left);
         }
         else {
-            break;
+            pT->left = NULL;
         }
-    }
-    return bst;
-}
-
-/**
- * @description: 二叉搜索树查找最小值
- * @param :bst
- * @return:ptree
- */
-pBinTree BinSearchTreeFindMin(pBinTree bst)
-{
-    if (bst != NULL) {
-        while (bst->left != NULL) {
-            bst = bst->left;
+        i++;
+        //右节点处理
+        if (dat[i] != NoInfo) {
+            pT->right = (pBinTree)malloc(sizeof(binTree));
+            pT->right->a = dat[i];
+            pT->right->left = pT->right->right = NULL;
+            QueueInsert(pQueu, pT->right);
         }
-    }
-    return bst;
-}
-
-/**
- * @description: 二叉搜索树查找最大值
- * @param :bst
- * @return:ptree
- */
-pBinTree BinSearchTreeFindMax(pBinTree bst)
-{
-    if (bst != NULL) {
-        while (bst->right != NULL) {
-            bst = bst->right;
+        else {
+            pT->left = NULL;
         }
+        i++;
     }
-    return bst;
-}
-
-/**
- * @description: 二叉搜索树插入一个元素
- * @param : bst；x
- * @return: ptree
- */
-pBinTree BinSearchTreeInsert(pBinTree bst, binTreeData x)
-{
-    if (bst == NULL) {
-        bst = (pBinTree)malloc(sizeof(binTree));
-        bst->a = x;
-    }
-    else if (bst->a > x) {  //插入二叉搜索树一定在叶子节点
-        bst->left = BinSearchTreeInsert(bst->left, x);
-    }
-    else if (bst->a < x) {
-        bst->right = BinSearchTreeInsert(bst->right, x);
-    }  //相等时，直接返回原节点，到叶子时返回生成的新节点
-    return bst;
-}
-
-/**
- * @description:二叉搜索树删除元素
- * @param :bst；x
- * @return:ptree
- */
-pBinTree BinSearchTreeDelete(pBinTree bst, int x)
-{
-    pBinTree temp;
-
-    if (bst != NULL) {
-        if (bst->a > x) {
-            bst->left = BinSearchTreeDelete(bst->left, x);
-        }
-        else if (bst->a < x) {
-            bst->right = BinSearchTreeDelete(bst->right, x);
-        }
-        else {  //找到要删除的节点
-            if (bst->left != NULL && bst->right != NULL) {
-                //两个子节点，取右边最小元素
-                temp = BinSearchTreeFindMin(bst->right);
-                bst->a = temp->a;
-                BinSearchTreeDelete(bst->right, temp->a);
-            }
-            else {  //一个或没节点，直接赋值，释放
-                temp = bst;
-                if (bst->left == NULL) {
-                    bst = bst->right;
-                }
-                else {
-                    bst = bst->left;
-                }
-                free(temp);
-            }
-        }
-    }
-    return bst;
+    return pTree;
 }
