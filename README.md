@@ -1,4 +1,4 @@
-# SingleListModule
+# DataStructureTemplate
 A Personal data structure template program.
 
 Thread model: win32
