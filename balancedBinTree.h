@@ -3,7 +3,7 @@
  * @Author: Jkonel
  * @Date: 2020-05-21 10:21:52
  * @LastEditors: jkonel
- * @LastEditTime: 2020-05-26 08:59:29
+ * @LastEditTime: 2020-05-26 17:33:02
  */ 
 
 #ifndef _BALANCEDBINTREE_H
@@ -19,5 +19,11 @@ typedef struct balanced_bin_tree
     int height;
 } balaancedBinTree, *pBalabcedBinTree;
 
+int AVLMax(int a, int b);
+pBalabcedBinTree AVLSingleLeftRotation(pBalabcedBinTree ptree);
+pBalabcedBinTree AVLSingleRightRotation(pBalabcedBinTree ptree);
+pBalabcedBinTree AVLDoubleLeftRightRotation(pBalabcedBinTree ptree);
+pBalabcedBinTree AVLDoubleRightLeftRotation(pBalabcedBinTree ptree);
+pBalabcedBinTree AVLInsert(pBalabcedBinTree ptree, balancedBinTreeData x);
 
 #endif

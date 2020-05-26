@@ -3,6 +3,8 @@
         "linkedlist.h": "c",
         "singlelist.h": "c",
         "bintree.h": "c",
-        "stack.h": "c"
+        "stack.h": "c",
+        "limits": "c",
+        "*.tcc": "c"
     }
 }
